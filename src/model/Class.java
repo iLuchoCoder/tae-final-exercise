@@ -50,4 +50,11 @@ public class Class {
     public void setStudentList(List<Student> studentList) {
         this.studentList = studentList;
     }
+
+    public String getInfo() {
+        return "Class{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}'+'\n';
+    }
 }

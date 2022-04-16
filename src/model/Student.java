@@ -35,4 +35,13 @@ public class Student extends Person{
     public void setMyClasses(List<Class> myClasses) {
         this.myClasses = myClasses;
     }
+
+    public String getInfo() {
+        return "Student{" +
+                "id=" + id +
+                ", name=" + getName() +
+                ", lastName=" + getLastName() +
+                ", idNumber=" + getIdNumber() +
+                '}'+'\n';
+    }
 }

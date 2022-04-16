@@ -1,5 +1,8 @@
 package model;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Teacher extends Person{
@@ -12,11 +15,15 @@ public class Teacher extends Person{
     private int antiquity;
     private int hours;
 
-    public Teacher(String name, String lastName, int idNumber) {
+    public Teacher(String name, String lastName, int idNumber, double baseSalary, boolean fullTime, int antiquity, int hours) {
         super(name,lastName,idNumber);
         setName(name);
         setLastName(lastName);
         setIdNumber(idNumber);
+        setBaseSalary(baseSalary);
+        setFullTime(fullTime);
+        setAntiquity(antiquity);
+        setHours(hours);
         this.isFilled = false;
         this.id = count.incrementAndGet();
     }
@@ -28,7 +35,6 @@ public class Teacher extends Person{
     public void setId(int id) {
         this.id = id;
     }
-
 
     public double getBaseSalary() {
         return baseSalary;
@@ -72,17 +78,19 @@ public class Teacher extends Person{
                 ", fullTime=" + fullTime +
                 ", antiquity=" + antiquity +
                 ", hours=" + hours +
-                '}';
+                ", salary=" + calculateSalary() +
+                '}'+'\n';
     }
 
-    public double calculateSalary(){
-        double salary = 0;
+    public String calculateSalary(){
+        BigDecimal bd = new BigDecimal(0);
         if(isFullTime()){
-            salary = getBaseSalary() * (getAntiquity()*1.1);
+            bd = new BigDecimal(getBaseSalary()).multiply(BigDecimal.valueOf((getAntiquity()*1.1)));
         }
         else{
-            salary = getBaseSalary() * getHours();
+            bd = new BigDecimal(getBaseSalary()).multiply(BigDecimal.valueOf((getHours())));
         }
-        return salary;
+        DecimalFormat df = new DecimalFormat("#,###.00");
+        return df.format(bd);
     }
 }
